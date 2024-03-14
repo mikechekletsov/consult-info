@@ -18,6 +18,10 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $file_type = $_FILES['file']['type'];
     $allowed_types = array('image/png', 'image/jpeg');
 
+    if (!is_dir("uploads")) {
+        mkdir("uploads", 0775, true);
+    }
+    
     if (in_array($file_type, $allowed_types)) {
         $upload_path = 'uploads/';
         $file_path = $upload_path . $file_name;
@@ -28,11 +32,14 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 }
 
 $filename = "uploads/messages/" . time() . ".txt";
+if (!is_dir("uploads/messages")) {
+    mkdir("uploads/messages", 0775, true);
+}
 $file_content = "Имя пользователя: $username\nE-mail: $email\nСообщение: $message\nФайл: " . __DIR__ . "/" . $file_path . "\n";
 file_put_contents($filename, $file_content);
 
-#chown -R www-data:www-data /var/www/html/uploads
-#chmod -R 775 /var/www/html/uploads
+#chown -R www-data:www-data /var/www/html
+#chmod -R 775 /var/www/html
 
 $_SESSION['success_message'] = "Ваше сообщение успешно отправлено!";
 
