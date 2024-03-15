@@ -6,6 +6,7 @@ if (isset($_SESSION['success_message'])) {
     unset($_SESSION['success_message']);
 }       
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -45,6 +46,7 @@ if (isset($_SESSION['success_message'])) {
                     echo '<label class="form-label mb-3">' . $success_message . '</label>';
                 }
                 ?>
+
             </div>    
         </div>    
     </div>
